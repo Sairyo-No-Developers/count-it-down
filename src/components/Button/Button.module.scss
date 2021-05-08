@@ -1,0 +1,25 @@
+.main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 140px;
+	margin-bottom: 1rem;
+	button {
+		width: 100%;
+		font-size: 1.7rem;
+		border-radius: 0.25em;
+		box-shadow: rgba(0, 0, 0, 0.493) 0.2em 0.2em 0.2em;
+		border: none;
+		outline: none;
+		padding: 0.46em;
+		font-family: monospace;
+		&:hover {
+			filter: brightness(0.8);
+		}
+	}
+}
+@media screen and (max-width: 500px) {
+	.main {
+		width: 95%;
+	}
+}

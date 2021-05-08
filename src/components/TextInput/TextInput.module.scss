@@ -1,0 +1,29 @@
+.main {
+	width: 95%;
+	max-width: 500px;
+	margin-bottom: 1rem;
+	label {
+		display: inline-block;
+		font-family: Verdana, Geneva, Tahoma, sans-serif;
+		font-weight: bolder;
+		font-size: 1.3rem;
+		padding-left: 0.1em;
+		padding-bottom: 0.2em;
+		color: #f5f5f5;
+		text-shadow: black 0.2em 0.2em 0.2em;
+	}
+	input {
+		width: 100%;
+		background: #ec8b8b;
+		font-size: 1.7rem;
+		border-radius: 0.25em;
+		box-shadow: rgba(0, 0, 0, 0.493) 0.2em 0.2em 0.2em;
+		border: none;
+		outline: none;
+		padding: 0.4em;
+		&::placeholder {
+			color: white;
+			font-size: 1.3rem;
+		}
+	}
+}
