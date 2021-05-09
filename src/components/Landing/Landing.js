@@ -22,8 +22,8 @@ const Landing = ({ targetTitle, setTargetTitle, targetTime, setTargetTime, setTi
 				timers.push(thisTimer);
 			} else {
 				timers = [ thisTimer ];
-				localStorage.setItem('count-down-timers', JSON.stringify(timers));
 			}
+			localStorage.setItem('count-down-timers', JSON.stringify(timers));
 		} else {
 			if (targetTitle.length < 1) {
 				return setError('Enter a title');
