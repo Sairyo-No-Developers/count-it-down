@@ -12,17 +12,20 @@ const Landing = ({
 	targetTime,
 	setTargetTime,
 	setTimerSet,
-	setError
+	setError,
+	setup,
+	textInput,
+	setTextInput
 }) => {
 	const handleStartButton = () => {
-		if (targetTitle.length > 0 && targetTime) {
+		if (textInput.length > 0 && targetTime) {
 			if (targetTime < new Date()) {
 				return setError('Select Future Date');
 			}
 			setTimerSet(true);
 			const getTimers = localStorage.getItem('count-down-timers');
 			const thisTimer = {
-				targetTitle,
+				targetTitle: textInput,
 				targetTime
 			};
 			let timers;
@@ -40,11 +43,14 @@ const Landing = ({
 					no: i
 				});
 			});
+			setTargetTitle(textInput);
 			setTimers(newList);
 			setTimerNo(timers.length - 1);
+			setTextInput('');
 			localStorage.setItem('count-down-timers', JSON.stringify(timers));
+			setup();
 		} else {
-			if (targetTitle.length < 1) {
+			if (textInput.length < 1) {
 				return setError('Enter a title');
 			}
 			if (targetTime === null) {
@@ -58,8 +64,8 @@ const Landing = ({
 			<TextInput
 				label="What Are You Waiting For?"
 				placeholder="Type It While You Wait..."
-				text={targetTitle}
-				setText={setTargetTitle}
+				text={textInput}
+				setText={setTextInput}
 			/>
 			<div className={s.date}>
 				<DateTimeInput label={'Enter Target Date & Time'} time={targetTime} setTime={setTargetTime} />

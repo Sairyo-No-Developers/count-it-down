@@ -1,8 +1,10 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../Button/Button';
 import s from './CountDown.module.scss';
 import beerSvg from '../../assets/images/undraw_Beer_celebration_cefj.svg';
 import { Player } from '@lottiefiles/react-lottie-player';
+import { toast } from 'react-toastify';
+import { toastIt } from '../../utils';
 
 const CountDown = ({
 	title = 'CountDown',
@@ -12,13 +14,15 @@ const CountDown = ({
 	setTimerSet,
 	timerNo,
 	timers,
-	setTimers
+	setTimers,
+	setup
 }) => {
 	const [ finished, setFinished ] = useState(false);
 	const calcGaps = (targetTime) => {
+		let newFlag = false;
 		let currTime = new Date().getTime();
 		if (currTime >= targetTime) {
-			setFinished(true);
+			newFlag = true;
 		}
 		let gap = targetTime - currTime;
 		let second = 1000;
@@ -26,23 +30,27 @@ const CountDown = ({
 		let hour = minute * 60;
 		let day = hour * 24;
 		return [
-			Math.floor(gap / day),
-			Math.floor((gap % day) / hour),
-			Math.floor((gap % hour) / minute),
-			Math.floor((gap % minute) / second)
+			[
+				Math.floor(gap / day),
+				Math.floor((gap % day) / hour),
+				Math.floor((gap % hour) / minute),
+				Math.floor((gap % minute) / second)
+			],
+			newFlag
 		];
 	};
 	const [ countdownItems, setCountdownItems ] = useState(() => {
-		return calcGaps(datetime.getTime());
+		return calcGaps(datetime.getTime())[0];
 	});
 	const reset = () => {
 		setTargetTime(null);
 		let getTimers = JSON.parse(localStorage.getItem('count-down-timers'));
 		getTimers.splice(timerNo, 1);
 		localStorage.setItem('count-down-timers', JSON.stringify(getTimers));
+		setup();
 		let newList = [];
 		getTimers.map((e, i) => {
-			newList.push({
+			return newList.push({
 				text: e.targetTitle,
 				time: new Date(e.targetTime),
 				no: i
@@ -55,8 +63,12 @@ const CountDown = ({
 	useEffect(
 		() => {
 			let i = setInterval(() => {
-				let gaps = calcGaps(datetime.getTime());
-				console.log(gaps);
+				let [ gaps, newFlag ] = calcGaps(datetime.getTime());
+				if (newFlag) {
+					setFinished(true);
+				} else {
+					setFinished(false);
+				}
 				setCountdownItems(gaps);
 			}, 1000);
 			return () => {
@@ -70,7 +82,6 @@ const CountDown = ({
 			{!finished ? (
 				<div className={s.timer}>
 					<h1>{title}</h1>
-					<h1>{datetime.toLocaleString()}</h1>
 					<div className={s.CountDown}>
 						{countdownItems[0] > 0 && (
 							<div>
@@ -88,7 +99,7 @@ const CountDown = ({
 						)}
 						{countdownItems[2] > 0 || countdownItems[1] > 0 ? (
 							<div>
-								<h2 className={s.item}>{countdownItems[2]}</h2>
+								<h2 className={s.item}>{countdownItems[2] < 0 ? 0 : countdownItems[2]}</h2>
 								<h2>Minute</h2>
 							</div>
 						) : (

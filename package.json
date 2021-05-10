@@ -15,6 +15,7 @@
 		"react-dom": "^17.0.2",
 		"react-onclickoutside": "^6.10.0",
 		"react-scripts": "4.0.3",
+		"react-toastify": "^7.0.4",
 		"web-vitals": "^1.1.2",
 		"workbox-background-sync": "^5.1.4",
 		"workbox-broadcast-update": "^5.1.4",

@@ -52,9 +52,29 @@ body {
 }
 
 .main {
+	position: relative;
 	width: 100%;
 	min-height: 100vh;
 	display: grid;
-	grid-template-rows: auto 1fr auto;
+	grid-template-rows: auto auto 1fr auto;
 	grid-template-columns: 100%;
+}
+
+.Toastify {
+	height: 0;
+	width: 0;
+}
+
+footer {
+	padding: 1rem;
+	text-align: center;
+	color: gainsboro;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	a {
+		text-decoration: none;
+		color: wheat;
+		&:hover {
+			color: darkcyan;
+		}
+	}
 }
