@@ -4,7 +4,16 @@ import DateTimeInput from '../DateTimeInput/DateTimeInput';
 import TextInput from '../TextInput/TextInput';
 import Button from '../Button/Button';
 
-const Landing = ({ targetTitle, setTargetTitle, targetTime, setTargetTime, setTimerSet, setError }) => {
+const Landing = ({
+	targetTitle,
+	setTimerNo,
+	setTimers,
+	setTargetTitle,
+	targetTime,
+	setTargetTime,
+	setTimerSet,
+	setError
+}) => {
 	const handleStartButton = () => {
 		if (targetTitle.length > 0 && targetTime) {
 			if (targetTime < new Date()) {
@@ -23,6 +32,16 @@ const Landing = ({ targetTitle, setTargetTitle, targetTime, setTargetTime, setTi
 			} else {
 				timers = [ thisTimer ];
 			}
+			let newList = [];
+			timers.map((e, i) => {
+				newList.push({
+					text: e.targetTitle,
+					time: new Date(e.targetTime),
+					no: i
+				});
+			});
+			setTimers(newList);
+			setTimerNo(timers.length - 1);
 			localStorage.setItem('count-down-timers', JSON.stringify(timers));
 		} else {
 			if (targetTitle.length < 1) {

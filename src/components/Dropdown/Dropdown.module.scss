@@ -1,0 +1,53 @@
+.button {
+	width: 10rem;
+	font-size: 1rem;
+	background: #38fa95;
+	padding: .5em;
+	border-radius: .25em;
+	border: none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	box-shadow: inset rgba(0, 0, 0, 0.712) 0.1em 0.1em 0.2em, inset #00ff7b 0.1em 0.1em 0.2em;
+}
+
+.main {
+	position: relative;
+}
+
+.list {
+	position: absolute;
+	bottom: 0;
+	border-radius: .25em;
+	transform: translate(0, calc(100% + 0.5rem));
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 10rem;
+	background: none;
+	overflow: hidden;
+	// animation: fadeIn 0.3s ease-in;
+	div {
+		width: 100%;
+		text-align: center;
+		padding: 0.5rem 0;
+		font-size: 0.8rem;
+		color: black;
+		background: #38fa96c0;
+		font-family: Verdana, Geneva, Tahoma, sans-serif;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		&:hover {
+			filter: brightness(0.8);
+			cursor: pointer;
+		}
+	}
+	box-shadow: rgba(0, 0, 0, 0.493) 0.2em 0.2em 0.2em;
+}
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}

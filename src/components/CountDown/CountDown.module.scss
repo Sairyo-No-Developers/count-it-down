@@ -1,7 +1,12 @@
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .timer {
 	width: 100%;
 	position: relative;
-	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;

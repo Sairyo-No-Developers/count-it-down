@@ -9,11 +9,13 @@ const CountDown = ({
 	datetime = new Date('May 12, 2021 16:25:02'),
 	setTargetTime,
 	setTargetTitle,
-	setTimerSet
+	setTimerSet,
+	timerNo,
+	timers,
+	setTimers
 }) => {
 	const [ finished, setFinished ] = useState(false);
-	const calcGaps = () => {
-		let targetTime = datetime.getTime();
+	const calcGaps = (targetTime) => {
 		let currTime = new Date().getTime();
 		if (currTime >= targetTime) {
 			setFinished(true);
@@ -31,29 +33,44 @@ const CountDown = ({
 		];
 	};
 	const [ countdownItems, setCountdownItems ] = useState(() => {
-		return calcGaps();
+		return calcGaps(datetime.getTime());
 	});
 	const reset = () => {
 		setTargetTime(null);
-		localStorage.setItem('count-down-timers', JSON.stringify([]));
+		let getTimers = JSON.parse(localStorage.getItem('count-down-timers'));
+		getTimers.splice(timerNo, 1);
+		localStorage.setItem('count-down-timers', JSON.stringify(getTimers));
+		let newList = [];
+		getTimers.map((e, i) => {
+			newList.push({
+				text: e.targetTitle,
+				time: new Date(e.targetTime),
+				no: i
+			});
+		});
+		setTimers(newList);
 		setTargetTitle('');
 		setTimerSet(false);
 	};
-	useEffect(() => {
-		let i = setInterval(() => {
-			let gaps = calcGaps();
-			console.log(gaps);
-			setCountdownItems(gaps);
-		}, 1000);
-		return () => {
-			clearInterval(i);
-		};
-	}, []);
+	useEffect(
+		() => {
+			let i = setInterval(() => {
+				let gaps = calcGaps(datetime.getTime());
+				console.log(gaps);
+				setCountdownItems(gaps);
+			}, 1000);
+			return () => {
+				clearInterval(i);
+			};
+		},
+		[ datetime ]
+	);
 	return (
-		<div>
+		<div className={s.container}>
 			{!finished ? (
 				<div className={s.timer}>
 					<h1>{title}</h1>
+					<h1>{datetime.toLocaleString()}</h1>
 					<div className={s.CountDown}>
 						{countdownItems[0] > 0 && (
 							<div>
