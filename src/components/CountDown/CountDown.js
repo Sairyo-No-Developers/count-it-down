@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import Button from '../Button/Button';
 import s from './CountDown.module.scss';
+import beerSvg from '../../assets/images/undraw_Beer_celebration_cefj.svg';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 const CountDown = ({
 	title = 'CountDown',
@@ -9,9 +11,13 @@ const CountDown = ({
 	setTargetTitle,
 	setTimerSet
 }) => {
+	const [ finished, setFinished ] = useState(false);
 	const calcGaps = () => {
 		let targetTime = datetime.getTime();
 		let currTime = new Date().getTime();
+		if (currTime >= targetTime) {
+			setFinished(true);
+		}
 		let gap = targetTime - currTime;
 		let second = 1000;
 		let minute = second * 60;
@@ -44,41 +50,54 @@ const CountDown = ({
 		};
 	}, []);
 	return (
-		<div className={s.main}>
-			<h1>{title}</h1>
-			<div className={s.CountDown}>
-				{countdownItems[0] > 0 && (
-					<div>
-						<h2 className={s.item}>{countdownItems[0]}</h2>
-						<h2>Day</h2>
+		<div>
+			{!finished ? (
+				<div className={s.timer}>
+					<h1>{title}</h1>
+					<div className={s.CountDown}>
+						{countdownItems[0] > 0 && (
+							<div>
+								<h2 className={s.item}>{countdownItems[0]}</h2>
+								<h2>Day</h2>
+							</div>
+						)}
+						{countdownItems[1] > 0 || countdownItems[0] > 0 ? (
+							<div>
+								<h2 className={s.item}>{countdownItems[1]}</h2>
+								<h2>Hour</h2>
+							</div>
+						) : (
+							''
+						)}
+						{countdownItems[2] > 0 || countdownItems[1] > 0 ? (
+							<div>
+								<h2 className={s.item}>{countdownItems[2]}</h2>
+								<h2>Minute</h2>
+							</div>
+						) : (
+							''
+						)}
+						<div>
+							<h2 className={s.item}>{countdownItems[3]}</h2>
+							<h2>Second</h2>
+						</div>
 					</div>
-				)}
-				{countdownItems[1] > 0 || countdownItems[0] > 0 ? (
-					<div>
-						<h2 className={s.item}>{countdownItems[1]}</h2>
-						<h2>Hour</h2>
-					</div>
-				) : (
-					''
-				)}
-				{countdownItems[2] > 0 || countdownItems[1] > 0 ? (
-					<div>
-						<h2 className={s.item}>{countdownItems[2]}</h2>
-						<h2>Minute</h2>
-					</div>
-				) : (
-					''
-				)}
-				{countdownItems[3] > 0 || countdownItems[2] > 0 ? (
-					<div>
-						<h2 className={s.item}>{countdownItems[3]}</h2>
-						<h2>Second</h2>
-					</div>
-				) : (
-					''
-				)}
-			</div>
-			<Button text="Reset" onClick={reset} />
+					<Button text="Reset" onClick={reset} />
+				</div>
+			) : (
+				<div className={s.timer}>
+					<Player
+						autoplay={true}
+						loop={false}
+						controls={false}
+						src="https://assets2.lottiefiles.com/packages/lf20_u4yrau.json"
+						className={s.player}
+					/>
+					<img src={beerSvg} alt="Celebration" />
+					<h2>Hooray! Your Wait Has Ended</h2>
+					<Button text="Reset" onClick={reset} />
+				</div>
+			)}
 		</div>
 	);
 };

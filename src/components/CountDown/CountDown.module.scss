@@ -1,10 +1,20 @@
-.main {
+.timer {
 	width: 100%;
+	position: relative;
 	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	animation: fadeIn 1.5s ease-in;
+	h2 {
+		color: whitesmoke;
+		font-family: Verdana, Geneva, Tahoma, sans-serif;
+		font-size: 3rem;
+		text-shadow: black 0.2em 0.2em 0.2em;
+		margin-top: 1.5rem;
+		text-align: center;
+	}
 	h1 {
 		color: whitesmoke;
 		font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -28,5 +38,31 @@
 		.item {
 			font-size: 2.2rem;
 		}
+	}
+	img {
+		width: 95%;
+		max-width: 360px;
+	}
+	button {
+		margin-top: 1rem;
+	}
+	.player {
+		height: 100%;
+		aspect-ratio: 1/1;
+		position: absolute;
+		z-index: 9;
+		pointer-events: none;
+		top: 0;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
 	}
 }
