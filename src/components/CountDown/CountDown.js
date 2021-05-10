@@ -99,14 +99,14 @@ const CountDown = ({
 						)}
 						{countdownItems[2] > 0 || countdownItems[1] > 0 ? (
 							<div>
-								<h2 className={s.item}>{countdownItems[2] < 0 ? 0 : countdownItems[2]}</h2>
+								<h2 className={s.item}>{countdownItems[2]}</h2>
 								<h2>Minute</h2>
 							</div>
 						) : (
 							''
 						)}
 						<div>
-							<h2 className={s.item}>{countdownItems[3]}</h2>
+							<h2 className={s.item}>{countdownItems[3] < 0 ? 0 : countdownItems[3]}</h2>
 							<h2>Second</h2>
 						</div>
 					</div>
