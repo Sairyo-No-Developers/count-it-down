@@ -15,7 +15,9 @@ const Landing = ({
 	setError,
 	setup,
 	textInput,
-	setTextInput
+	setTextInput,
+	backgroundColor,
+	setBackgroundColor
 }) => {
 	const handleStartButton = () => {
 		if (textInput.length > 0 && targetTime) {
@@ -26,7 +28,8 @@ const Landing = ({
 			const getTimers = localStorage.getItem('count-down-timers');
 			const thisTimer = {
 				targetTitle: textInput,
-				targetTime
+				targetTime,
+				backgroundColor
 			};
 			let timers;
 			if (getTimers) {

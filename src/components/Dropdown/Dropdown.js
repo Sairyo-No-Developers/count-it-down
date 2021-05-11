@@ -18,6 +18,15 @@ class TempList extends Component {
 							this.props.setTimerNo(e.no);
 							this.props.setTimerSet(true);
 							this.props.toggleVisible();
+							let timers = localStorage.getItem('count-down-timers');
+							if (timers) {
+								timers = JSON.parse(timers);
+								timers.map((e, i) => {
+									if (i === e.no) {
+										this.props.setBackgroundColor(e.backgroundColor || '#1f1f1f');
+									}
+								});
+							}
 						}}
 					>
 						{e.text}
@@ -36,7 +45,8 @@ const Dropdown = ({
 	setTargetTime,
 	setTimerNo,
 	listItems = [ { text: '1', onClick: () => {} } ],
-	text = 'Select Countdown'
+	text = 'Select Countdown',
+	setBackgroundColor
 }) => {
 	const [ clicked, setClicked ] = useState(false);
 	return (
@@ -60,6 +70,7 @@ const Dropdown = ({
 					setTargetTime={setTargetTime}
 					setTargetTitle={setTargetTitle}
 					setTimerNo={setTimerNo}
+					setBackgroundColor={setBackgroundColor}
 				/>
 			)}
 		</div>

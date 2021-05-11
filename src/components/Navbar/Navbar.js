@@ -3,6 +3,7 @@ import Dropdown from '../Dropdown/Dropdown';
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import BackgroundChange from '../BackgroundChange/BackgroundChange';
 
 const Navbar = ({
 	setTimerSet,
@@ -13,12 +14,14 @@ const Navbar = ({
 	targetTime,
 	setTargetTime,
 	timerNo,
-	setTimerNo
+	setTimerNo,
+	backgroundColor,
+	setBackgroundColor
 }) => {
 	const [ time, setTime ] = useState('');
 	useEffect(() => {
 		let i = setInterval(() => {
-			setTime(new Date().toLocaleTimeString());
+			setTime(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
 		}, 1000);
 	});
 	return (
@@ -31,6 +34,7 @@ const Navbar = ({
 					setTargetTime={setTargetTime}
 					listItems={timers}
 					text={targetTitle.length > 0 ? targetTitle : 'Select Countdown'}
+					setBackgroundColor={setBackgroundColor}
 				/>
 				<button
 					className={s.button}
@@ -41,7 +45,15 @@ const Navbar = ({
 					<FontAwesomeIcon icon={faPlusCircle} />
 				</button>
 			</div>
-			<div className={s.time}>{time}</div>
+			<div className={s.time}>
+				<span>{time}</span>
+				<BackgroundChange
+					timerNo={timerNo}
+					setTimerNo={setTimerNo}
+					backgroundColor={backgroundColor}
+					setBackgroundColor={setBackgroundColor}
+				/>
+			</div>
 		</nav>
 	);
 };

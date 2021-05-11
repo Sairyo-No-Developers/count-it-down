@@ -15,6 +15,7 @@ const App = () => {
 	const [ timers, setTimers ] = useState([]);
 	const [ timerNo, setTimerNo ] = useState(0);
 	const [ error, setError ] = useState('');
+	const [ backgroundColor, setBackgroundColor ] = useState('#1f1f1f');
 	const setup = useBackgroundCheck();
 	useEffect(() => {
 		setup();
@@ -24,6 +25,9 @@ const App = () => {
 			if (currTimer.length > 0) {
 				setTargetTime(new Date(currTimer[0].targetTime));
 				setTargetTitle(currTimer[0].targetTitle);
+				let bg = currTimer[0].backgroundColor || '#1f1f1f';
+				setBackgroundColor(bg);
+				document.body.style.backgroundColor = bg;
 				let newList = [];
 				currTimer.map((e, i) => {
 					return newList.push({
@@ -48,6 +52,8 @@ const App = () => {
 				timers={timers}
 				targetTitle={targetTitle}
 				timerSet={timerSet}
+				backgroundColor={backgroundColor}
+				setBackgroundColor={setBackgroundColor}
 			/>
 			{timerSet ? (
 				<CountDown
@@ -60,6 +66,8 @@ const App = () => {
 					timers={timers}
 					setTimers={setTimers}
 					setup={setup}
+					backgroundColor={backgroundColor}
+					setBackgroundColor={setBackgroundColor}
 				/>
 			) : (
 				<Landing
@@ -74,6 +82,7 @@ const App = () => {
 					setup={setup}
 					textInput={textInput}
 					setTextInput={setTextInput}
+					backgroundColor={backgroundColor}
 				/>
 			)}
 			{error.length > 0 && (

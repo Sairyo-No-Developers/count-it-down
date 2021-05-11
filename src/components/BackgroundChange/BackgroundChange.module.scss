@@ -1,0 +1,62 @@
+.main {
+	position: relative;
+}
+
+.dropdown {
+	position: absolute;
+	bottom: 0;
+	left: 100%;
+	transform: translate(-100%, 105%);
+	z-index: 2;
+	background: #0f0f0f;
+	min-width: 200px;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 0.4em;
+	box-shadow: black 0.2em 0.2em 0.2em;
+	label {
+		width: 100%;
+		text-align: center;
+		padding: 0px 10px;
+		margin: 5px 0px;
+		font-size: 1.2rem;
+	}
+	input {
+		width: calc(100% - 20px);
+		margin: 5px;
+		background: #3f3f3f;
+		border: none;
+		outline: none;
+		box-shadow: black 0.1em 0.1em 0.1em;
+	}
+	button {
+		font-size: 1.3rem;
+		width: 1.9em;
+		height: 1.9em;
+		display: grid;
+		place-content: center;
+		border-radius: 50%;
+		margin-top: 0.5rem;
+		background: wheat;
+		box-shadow: black 0.1em 0.1em 0.2em;
+	}
+}
+
+.settings {
+	font-size: 1.7rem;
+	color: wheat;
+	background: none;
+	border: none;
+	&:hover,
+	&:active,
+	&:focus {
+		border: none;
+		outline: none;
+	}
+	&:hover {
+		filter: brightness(1.2);
+	}
+}
