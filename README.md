@@ -26,8 +26,8 @@ npm run build
 ## Our Targeted Goals
 
 - [x] Create a minimal dark theme design using Sass.
-- [ ] Multiple Countdown system.
-- [ ] Setting notifications and toasts when a countdown ends.
+- [x] Multiple Countdown system.
+- [x] Setting notifications and toasts when a countdown ends.
 - [ ] Custom background and theme selection for user.
 
 ## Thanks For Taking Time In Viewing Our Project
