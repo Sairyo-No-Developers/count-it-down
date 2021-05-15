@@ -2,10 +2,26 @@ import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import sfx from './assets/sound/notification_up.mp3';
 
+export const desktopNotification = (msg) => {
+	if (!document.hasFocus()) {
+		if (Notification.permission !== 'granted') Notification.requestPermission();
+		else {
+			var notification = new Notification('The Wait Is Over', {
+				icon: 'https://count-it-down.sairyonodevs.in/Logo256.png',
+				body: msg
+			});
+			notification.onclick = function() {
+				window.open('https://count-it-down.sairyonodevs.in/');
+			};
+		}
+	}
+};
+
 export const toastIt = (msg) => {
 	let audio = new Audio(sfx);
 	audio.play();
 	toast.success(msg);
+	desktopNotification(msg);
 };
 
 export const useBackgroundCheck = () => {

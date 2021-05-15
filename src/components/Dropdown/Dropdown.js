@@ -23,7 +23,9 @@ class TempList extends Component {
 								timers = JSON.parse(timers);
 								timers.map((e, i) => {
 									if (i === e.no) {
-										this.props.setBackgroundColor(e.backgroundColor || '#1f1f1f');
+										return this.props.setBackgroundColor(e.backgroundColor || '#1f1f1f');
+									} else {
+										return null;
 									}
 								});
 							}

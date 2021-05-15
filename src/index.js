@@ -4,6 +4,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
+if (Notification.permission !== 'granted') Notification.requestPermission();
+
 ReactDOM.render(
 	<React.StrictMode>
 		<App />
